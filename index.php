@@ -11,8 +11,8 @@ if (isset($_POST['envoi'])) {
 
     if (isset($_POST['calcul'])) {
         $calcul = unserialize(base64_decode($_POST['calcul']));
-       var_dump($_POST['reponses']);
         $reponses = $_POST['reponses'];
+
     $calcul->setReponses($reponses);
     $calcul->compare();
     $resultats = $calcul->getOperations();
