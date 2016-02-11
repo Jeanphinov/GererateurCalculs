@@ -16,8 +16,13 @@ class GenerateurCalculs
 
     public function __construct($n)
     {
+        $this->genererOperations($n);
+    }
+
+    public function genererOperations($n){
         for ($i = 0; $i < $n; $i++) {
-            $o = $this->getOperateurs();
+
+           $o='add'.ucfirst($this->getOperateurs());
             $this->$o();
 
         }
@@ -29,26 +34,31 @@ class GenerateurCalculs
 
     }
 
+    private function calculResultat($ab){
+        $this->setOperations($ab, eval('return '.$ab.';'));
+    }
 
-    private function addition()
+    private function addAddition()
     {
         $a = rand(0, self::MAX);
         $b = rand(0, self::MAX);
-        $a_b = $a . " + " . $b;
-        $soluce = $a + $b;
-        $this->setOperations($a_b, $soluce);
+        $a_b = $a . "+" . $b;
+
+       // $soluce=eval('return '.$a_b.';');
+       // $this->setOperations($a_b, $soluce);
+       // $this->setOperations($a_b, eval('return '.$a_b.';'));
+        $this->calculResultat($a_b);
     }
 
-    private function soustraction()
+    private function addSoustraction()
     {
         $a = rand(0, self::MAX);
         $b = rand(0, $a);
-        $a_b = $a . " - " . $b;
-        $soluce = $a - $b;
-        $this->setOperations($a_b, $soluce);
+        $a_b = $a . "-" . $b;
+        $this->calculResultat($a_b);
     }
 
-    private function division()
+    private function addDivision()
     {
         $a = rand(0, self::MAX);
         $test = false;
@@ -58,18 +68,16 @@ class GenerateurCalculs
             if ($a % $b == 0) $test = true;
         }
 
-        $a_b = $a . " / " . $b;
-        $soluce = $a / $b;
-        $this->setOperations($a_b, $soluce);
+        $a_b = $a . "/" . $b;
+        $this->calculResultat($a_b);
     }
 
-    private function multiplication()
+    private function addMultiplication()
     {
         $a = rand(0, self::MAX);
         $b = rand(0, self::MAX / 4);
-        $a_b = $a . " X " . $b;
-        $soluce = $a * $b;
-        $this->setOperations($a_b, $soluce);
+        $a_b = $a . "*" . $b;
+        $this->calculResultat($a_b);
     }
 
     /**
